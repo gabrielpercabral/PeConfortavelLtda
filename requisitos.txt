@@ -1,0 +1,14 @@
+• Produtos
+    o Cadastro de Produtos
+    o Lista de Produtos
+• Clientes
+    o Cadastro de Clientes
+    o Lista de Clientes
+• Fabricantes
+    o Cadastro de Fabricantes
+    o Lista de Fabricantes
+• Venda
+    o Registro de Venda para um determinado cliente
+    o Lista das Vendas realizadas
+• Login
+• Contato para o SAC
