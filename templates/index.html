@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  Pé Confortável Ltda.
+{% endblock %}
+
+{% block menu %}
+    {{ block.super }} 
+    <!-- Você pode adicionar itens extras ao menu apenas para esta página -->
+{% endblock %}
+
+{% block corpo %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Bem-vindo ao Pé Confortável!</h1>
+        <p class="lead">Conforto de qualidade para os seus pés.</p>
+        
+        <div class="container mt-4">
+          <div id="destaquesCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+
+              <button type="button" 
+              data-bs-target="#destaquesCarousel" 
+              data-bs-slide-to="0" 
+              class="active"></button>
+
+              <button type="button"
+              data-bs-target="#destaquesCarousel"
+              data-bs-slide-to="1"></button>
+
+              <button type="button"
+              data-bs-target="#destaquesCarousel"
+              data-bs-slide-to="2"></button>
+
+
+            </div>
+            <div class="carousel-inner rounded">
+              <!-- Foto 1 -->
+               <div class="carousel-item active">
+                <img src="/static/img/tenis2.jpeg" alt="Destaque1" class="d-block w-100">
+               </div>
+               <div class="carousel-caption d-none d-md-block">
+                <h5>Promoção de Verão</h5>
+                <p>Descontos especiais em produtos selecionados</p>
+               </div>
+
+
+              <!-- Foto 2 -->
+              <div class="carousel-item active">
+                <img src="/static/img/tenis4.jpeg" alt="Destaque2" class="d-block w-100">
+               </div>
+               <div class="carousel-caption d-none d-md-block">
+                <h5>Novidades Chegaram</h5>
+                <p>Confira nossos lançamentos exclusivos</p>
+               </div>
+
+
+              <!-- Foto 3 -->
+              <div class="carousel-item active">
+                <img src="/static/img/tenis3.jpeg" alt="Destaque3" class="d-block w-100">
+               </div>
+               <div class="carousel-caption d-none d-md-block">
+                <h5>Novidades Chegaram</h5>
+                <p>Confira nossos lançamentos exclusivos</p>
+               </div>
+            </div>
+          </div>
+
+          <button class="carousel-control-prev"
+          type="button"
+          data-bs-target="#destaquesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+
+
+          <button class="carousel-control-next"
+          type="button"
+          data-bs-target="#destaquesCarousel"
+          data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Próximo</span>
+          </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Adiciona evento de clique em todo o carousel para redirecionar
+document.getElementById('destaquesCarousel').addEventListener('click', function() {
+    window.location.href = "{% url 'produtos:listar' %}";
+});
+
+// Opcional: Faz o carousel passar automaticamente a cada 5 segundos
+document.addEventListener('DOMContentLoaded', function() {
+    var carousel = new bootstrap.Carousel(document.getElementById('destaquesCarousel'), {
+        interval: 5000,
+        wrap: true
+    });
+});
+</script>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}  {# Mantém o footer original #}
+    <!-- Você pode adicionar conteúdo extra ao footer apenas para esta página -->
+{% endblock %}
