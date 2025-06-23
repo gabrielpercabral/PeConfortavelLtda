@@ -12,7 +12,7 @@ def listar(request):
     contexto = {
         'clientes': lista_clientes,
     }
-    return render(request, 'clientes/listarClientes.html', context=contexto)
+    return render(request, 'clientes/listaClientes.html', context=contexto)
 
 def cadastrar(request):
     if request.method == 'POST':
