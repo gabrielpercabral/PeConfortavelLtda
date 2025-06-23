@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block title %}
+        <title>Pé Confortavel</title>
+    {% endblock %}
+
+
+
+        {% block menu %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Pé Confortável Ltda.</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'produtos:cadastro' %}">Cadastro</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'produtos:listar' %}">Listar</a></li>
+            
+            
+            
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login:login' %}">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        {%  endblock %}
+
+        {% block corpo %}
+        <main class="container m-2 w-75 mx-auto my-font-family">
+
+    <div class="hero">
+        <div class="col text-center m-0">
+            <h1 class="mt-2 mb-5 my-h2">Cadastro de produtos</h1>
+        </div>
+    </div>
+
+    <!-- formulario HTML -->
+    <section class="hero">
+        <form name="frmCadastrar" action="{% url 'produtos:cadastro' %}" method="post" class="my-label-color-purple">
+            {% csrf_token %}
+            
+            <!-- Product Name (Full Width) -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label for="idTxtNomeProdutos" class="form-label">Nome do produto</label>
+                    <input class="form-control form-control-lg" type="text" id="idTxtNomeProdutos" name="nome" 
+                           placeholder="Digite o nome completo do produto" maxlength="70" required>
+                </div>
+            </div>
+        
+            <!-- Price Fields (Equal Columns) -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="idPrecoCompra" class="form-label">Preço de compra</label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input class="form-control" type="number" step="0.01" min="0" id="idPrecoCompra" name="precoCompra" 
+                               placeholder="0,00" required>
+                    </div>
+                    <div class="form-text">Custo de aquisição do produto</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="idPrecoVenda" class="form-label">Preço de venda</label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input class="form-control" type="number" step="0.01" min="0" id="idPrecoVenda" name="precoVenda" 
+                               placeholder="0,00" required>
+                    </div>
+                    <div class="form-text">Preço para o consumidor final</div>
+                </div>
+            </div>
+        
+            <!-- Color and Supplier (Equal Columns) -->
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <label for="idCor" class="form-label">Cor principal</label>
+                    <select class="form-select" id="idBSelCor" name="cor" required>
+                        <option value="" selected disabled>Selecione a cor</option>
+                        <option value="azul">Azul</option>
+                        <option value="vermelho">Vermelho</option>
+                        <option value="verde">Verde</option>
+                        <option value="amarelo">Amarelo</option>
+                        <option value="branco">Branco</option>
+                        <option value="preto">Preto</option>
+                        <option value="marrom">Marrom</option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <label for="idFornecedor" class="form-label">Fornecedor</label>
+                    <select class="form-select" id="idBSelFornecedor" name="fabricantesCodigo" required>
+                        <option value="" selected disabled>Selecione o fornecedor</option>
+                        {% for fabricantes in fabricantes %}
+                            <option value="{{ fabricantes.codigo }}">{{ fabricantes.nome }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-text">Empresa que fornece este produto</div>
+                </div>
+            </div>
+        
+            <!-- Manufacturing Date and Image (Equal Columns) -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="idDataFabricacao" class="form-label">Data de fabricação</label>
+                    <input class="form-control" type="date" id="idDataFabricacao" name="DataFabricacao" required>
+                    <div class="form-text">Quando o produto foi fabricado</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="idTxtImagem" class="form-label">Imagem do produto</label>
+                    <div class="input-group">
+                        <span class="input-group-text">img/</span>
+                        <input class="form-control" type="text" id="idTxtImagem" name="imagem" 
+                               placeholder="nome-da-imagem" maxlength="25" required>
+                        <span class="input-group-text">.jpg</span>
+                    </div>
+                    <div class="form-text">Nome do arquivo de imagem (sem extensão)</div>
+                </div>
+            </div>
+        
+            <!-- Form Buttons (Centered) -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <button type="reset" class="btn btn-outline-secondary px-4 me-3">
+                        <i class="bi bi-eraser me-2"></i> Limpar
+                    </button>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-2"></i> Cadastrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+        {% endblock %}

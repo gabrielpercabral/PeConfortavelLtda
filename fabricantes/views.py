@@ -29,7 +29,7 @@ def excluir(request, codigo):
     fabricante.delete()
     return redirect('fabricantes:listar')
 
-def carregar_fabricante(request, codigo):
+def carregar_fabricantes(request, codigo):
     fabricante = Fabricantes.objects.get(pk=codigo)
     contexto = {
         'fabricante': fabricante,

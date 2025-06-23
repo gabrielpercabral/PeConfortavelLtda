@@ -16,7 +16,7 @@ class Produtos(models.Model):
                            help_text='Cor do produto')
     imagem = models.CharField(max_length=25,
                                 help_text='Nome da imagem do produto')
-    fornecedoresCodigo = models.ForeignKey(Fabricantes, null=True, blank=True,
+    fabricantesCodigo = models.ForeignKey(Fabricantes, null=True, blank=True,
                                       related_name='fabricantesCodigo',
                                       on_delete=models.SET_NULL,)
     

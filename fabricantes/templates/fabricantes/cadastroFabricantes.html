@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block title %}
+        <title>Pé Confortavel</title>
+    {% endblock %}
+
+
+
+        {% block menu %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Pé Confortável Ltda.</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'fabricantes:cadastro' %}">Cadastro</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'fabricantes:listar' %}">Listar</a></li>
+        
+        
+        
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login:login' %}">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {%  endblock %}
+
+        {% block corpo %}
+        <main class="container m-2 w-75 mx-auto my-font-family">
+
+    <div class="hero">
+        <div class="col text-center m-0">
+            <h1 class="mt-2 mb-5 my-h2">Cadastro de Fornecedores</h1>
+        </div>
+    </div>
+
+    <!-- formulario HTML -->
+    <section class="hero">
+    <form name="frmCadastrar" action="{% url 'fabricantes:cadastrar' %}" method="post" class="my-label-color-purple">
+    {% csrf_token %}
+
+    
+        <div>
+            <label for="idTxtNome" class="form-label">nome</label>
+            <input class="form-control" type="text" id="idTxtNome" name="nome" 
+                   placeholder="Informe o nome" maxlength="11" required>
+        </div>
+    
+
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <button type="reset" class="btn btn-outline-secondary me-2">Limpar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
+    </div>
+</form>
+    </section>
+
+        {% endblock %}
