@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Pé Confortável</title>
+{% endblock %}
+
+{% block menu %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Pé Confortável Ltda.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'clientes:cadastro' %}">Cadastro</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'clientes:listar' %}">Listar</a></li>
+
+
+
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'login:login' %}">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block corpo %}
+<main class="container m-2 w-75 mx-auto my-font-family">
+
+    <div class="hero">
+        <div class="col text-center m-0">
+            <h1 class="mt-2 mb-5 my-h2">Cadastro de clientes</h1>
+        </div>
+    </div>
+
+    <!-- formulario HTML -->
+    <section class="hero">
+        <form name="frmCadastrar" action="{% url 'clientes:cadastrar' %}" method="post" class="my-label-color-purple">
+            {% csrf_token %}
+            {% if form.errors %}
+<div class="alert alert-danger">
+    {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+            <p><strong>{{ field|title }}:</strong> {{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endif %}
+            
+            <!-- Name Field (Full Width) -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label for="idTxtNomeclientes" class="form-label">Nome do cliente</label>
+                    <input class="form-control form-control-lg" type="text" id="idTxtNomeclientes" name="nome" 
+                           placeholder="Informe o nome completo do cliente" minlength="10" maxlength="25" required>
+                </div>
+            </div>
+        
+            <!-- CPF and Phone (Equal Columns) -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="idTxtCpf" class="form-label">CPF</label>
+                    <input class="form-control" type="text" id="idTxtCpf" name="cpf" 
+                        placeholder="000.000.000-00" maxlength="14" required
+                        pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
+                        title="Formato: 000.000.000-00">
+                    <div class="form-text">Informe o CPF com pontos e hífen</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="idTxtTelefone" class="form-label">Telefone</label>
+                    <input class="form-control" type="text" id="idTxtTelefone" name="telefone" 
+                           placeholder="(00) 00000-0000" maxlength="11" required>
+                </div>
+            </div>
+        
+            <!-- Address and City (3/4 - 1/4 Ratio) -->
+            <div class="row mb-4">
+                <div class="col-md-8 mb-3 mb-md-0">
+                    <label for="idTxtEndereco" class="form-label">Endereço</label>
+                    <input class="form-control" type="text" id="idTxtEndereco" name="endereco" 
+                           placeholder="Rua, número, complemento" maxlength="100" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="idTxtCidade" class="form-label">Cidade</label>
+                    <input class="form-control" type="text" id="idTxtCidade" name="cidade" 
+                           placeholder="Sua cidade" maxlength="50" required>
+                </div>
+            </div>
+        
+            <!-- Triple Select Fields (Equal Columns) -->
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <label for="idBSelUf" class="form-label">Estado (UF)</label>
+                    <select class="form-select" id="idBSelUf" name="uf" required>
+                        <option value="" selected disabled>Selecione seu estado</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="PR">Paraná</option>
+                        <option value="BA">Bahia</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <label for="idBSelContato" class="form-label">Preferência de contato</label>
+                    <select class="form-select" id="idBSelContato" name="contato" required>
+                        <option value="" selected disabled>Como prefere ser contatado?</option>
+                        <option value="C">Carta</option>
+                        <option value="E">E-mail</option>
+                        <option value="T">Telefone</option>
+                        <option value="F">Fax</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="idBSelGenero" class="form-label">Gênero</label>
+                    <select class="form-select" id="idBSelGenero" name="genero" required>
+                        <option value="" selected disabled>Identificação de gênero</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="O">Outro/Prefiro não informar</option>
+                    </select>
+                </div>
+            </div>
+        
+            <!-- Email and Password (Equal Columns) -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="idEmail" class="form-label">E-mail</label>
+                    <input class="form-control" type="email" id="idEmail" name="email" 
+                           placeholder="seu@email.com" maxlength="100" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="idSenha" class="form-label">Senha</label>
+                    <div class="input-group">
+                        <input class="form-control" type="password" id="idSenha" name="senha" 
+                               placeholder="Mínimo 8 caracteres" maxlength="256" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <div class="form-text">Use letras, números e símbolos</div>
+                </div>
+            </div>
+        
+            <!-- Form Buttons (Centered) -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <button type="reset" class="btn btn-outline-secondary px-4 me-3">
+                        <i class="bi bi-eraser me-2"></i>Limpar
+                    </button>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-person-plus me-2"></i>Cadastrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+</main>
+
+{% endblock %}
